@@ -47,18 +47,22 @@ router.beforeEach( (to,from,next)=>{
   let logeado= localStorage.getItem("pro_logeado");
   let valor= false;
   if(typeof logeado === 'string'){
-    valor= JSON.parse(logeado).value;
+    valor= JSON.parse(logeado);
   }
   let protegido = to.matched.some(record => record.meta.requiresAuth)
   //console.log(to,from,"eds",protegido, valor );
   
   if(protegido && valor){
+      console.log(`${to.path} protegida, logeado:${valor}`)
       next();
   }else if(protegido && !valor){
+    console.log(`${to.path} protegida, sin logeo:${valor}`)
     next({name:"SignIn"});
   }else if(!protegido && valor){
+    console.log(`${to.path} no protegida, logeado:${valor}`)
     next();
   }else{
+    console.log(`${to.path} no protegida, no logeado:${valor}`)
       next();
   }
 });

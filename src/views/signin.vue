@@ -31,8 +31,8 @@ import {onMounted, ref} from 'vue';
 import { useStorage } from "vue3-storage";
 import * as yup from 'yup';
 import Swal from 'sweetalert2'
-// import { useRouter } from 'vue-router';
-import router from "@/router";
+import { useRouter } from 'vue-router';
+
 
 const email= ref<null|string>();
 const contrasena= ref<null|string>();
@@ -41,7 +41,7 @@ let schema = yup.object().shape({
   email: yup.string().email(),
   pass: yup.string().required(),
 });
-// const router = useRouter();
+const router = useRouter();
 
  function login(){
   //console.log(email.value,contrasena.value);
@@ -63,9 +63,12 @@ let schema = yup.object().shape({
 
       if(valor.email==email.value && valor.pass==contrasena.value){
           //storage.setStorageSync("logeado", true);
-          console.log("Enviar");
+          console.log("Enviar",router);
           localStorage.setItem("pro_logeado",true);
+         
           router.push({name: 'HomeLogin'});
+   
+         
           
       }
   
