@@ -1,4 +1,8 @@
 <template>
+    <nav>
+    <router-link to="/">home</router-link> |
+    <router-link to="/signin">SignIn</router-link>
+  </nav>
   <div class="about">
       <div class="w-full max-w-xs" >
       <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -44,7 +48,9 @@ function save(){
   })
   .then(function (valid) {
     if(valid){ // => true
-      storage.setStorageSync("test-key", {email:email.value,pass:contrasena.value});
+    console.log(email.value,contrasena.value)
+     /// storage.setStorageSync("test-key", {email:email.value,pass:contrasena.value});
+      localStorage.setItem("pro_test-key",JSON.stringify({email:email.value,pass:contrasena.value}));
       Swal.fire({
         title: 'Registro exitoso!',
         text: 'Registro almacenado',
@@ -60,11 +66,7 @@ function save(){
       });
     }
   });
-  limpiar()
+  
 }
 
-function limpiar(){
-  email.value="";
-  contrasena.value="";
-}
 </script>
